@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conciertos index{% endblock %}
+
+{% block body %}
+    <h1>Conciertos index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id_promotor</th>
+                <th>Id_recinto</th>
+                <th>Nombre</th>
+                <th>Numero_espectadores</th>
+                <th>Fecha</th>
+                <th>Rentabilidad</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for concierto in conciertos %}
+            <tr>
+                <td>{{ concierto.id }}</td>
+                <td>{{ concierto.idPromotor }}</td>
+                <td>{{ concierto.idRecinto }}</td>
+                <td>{{ concierto.nombre }}</td>
+                <td>{{ concierto.numeroEspectadores }}</td>
+                <td>{{ concierto.fecha ? concierto.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ concierto.rentabilidad }}</td>
+                <td>
+                    <a href="{{ path('conciertos_show', {'id': concierto.id}) }}">show</a>
+                    <a href="{{ path('conciertos_edit', {'id': concierto.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('conciertos_new') }}">Create new</a>
+{% endblock %}
